@@ -52,6 +52,11 @@ public class ModeleController {
         return modeleService.saveModele(marque,nom);
     }
     
+    @GetMapping("/modeles/{idMarque}")
+    public List<Modele> findAllByIdMarque(@PathVariable int idMarque){
+        return modeleRepository.findAllByMarqueIdMarque(idMarque);
+    }
+    
     @PostMapping("/modeles")
     public void saves(Long idMarque,String nom,Long[] idCategories,Long[] idCarburants){
         Marque marque = marqueRepository.findById(idMarque).get();
