@@ -46,6 +46,11 @@ public class ModeleController {
         return modeleRepository.findAll();
     }
 
+    @GetMapping("/auth/modeles")
+    public List<Modele> findAll(){
+        return modeleRepository.findAll();
+    }
+
     @PostMapping("/modele")
     public Modele save(Long idMarque,String nom){
         Marque marque = marqueRepository.findById(idMarque).get();
@@ -54,6 +59,11 @@ public class ModeleController {
     
     @GetMapping("/modeles/{idMarque}")
     public List<Modele> findAllByIdMarque(@PathVariable int idMarque){
+        return modeleRepository.findAllByMarqueIdMarque(idMarque);
+    }
+    
+    @GetMapping("/auth/modeles/{idMarque}")
+    public List<Modele> findAllByIdMarqueauth(@PathVariable int idMarque){
         return modeleRepository.findAllByMarqueIdMarque(idMarque);
     }
     
