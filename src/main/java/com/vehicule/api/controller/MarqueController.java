@@ -24,6 +24,11 @@ public class MarqueController {
         return marqueRepository.findAll();
     }
 
+    @GetMapping("/auth/marques")
+    public List<Marque> findAllauth(){
+        return marqueRepository.findAll();
+    }
+
     @PostMapping("/marque")
     public Marque save(String nom){
         return marqueService.saveMarque(nom);
