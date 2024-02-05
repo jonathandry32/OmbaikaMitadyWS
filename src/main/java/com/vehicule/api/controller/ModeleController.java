@@ -47,7 +47,7 @@ public class ModeleController {
     }
 
     @GetMapping("/auth/modeles")
-    public List<Modele> findAll(){
+    public List<Modele> findAllauth(){
         return modeleRepository.findAll();
     }
 

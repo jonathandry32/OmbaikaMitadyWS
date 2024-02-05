@@ -157,12 +157,18 @@ public class AnnonceController {
         return result;
     }
     
-    @PutMapping("/annonces/sell")
-    public void updateStatusByIdAnnonce(Long idAnnonce,Long idUser) {
-        annonceService.updateStatusByIdAnnonce(idAnnonce);
+    @PostMapping("/annonces/demandeachat")
+    public void demandeachat(Long idAnnonce,Long idUser) {
         User acheteur = userRepository.findById(idUser).get();
         Annonce annonce = annonceRepository.findById(idAnnonce).get();
         venteannonceService.saveVenteAnnonce(acheteur,annonce);
+    }
+    
+    @PutMapping("/annonces/sell")
+    public void updateStatusByIdAnnonce(Long idAnnonce,Long idVenteAnnonce,Long idUser) {
+        annonceService.updateStatusByIdAnnonce(idAnnonce);
+        venteannonceService.validerVenteAnnonce(idVenteAnnonce);
+        venteannonceService.supprimerVenteAnnonces(idAnnonce,idUser);
     }
 
     @PutMapping("/annonces/validate")

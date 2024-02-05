@@ -27,7 +27,7 @@ public class VenteAnnonceController {
         this.userRepository = userRepository;
         this.annonceRepository = annonceRepository;
     }
-
+    
     @GetMapping("/venteannonces")
     public List<VenteAnnonce> findAll(){
         return venteannonceRepository.findAll();
@@ -79,5 +79,9 @@ public class VenteAnnonceController {
     @GetMapping("/venteannonce/commission")
     public List<Object[]> sommeCommission() {
         return venteannonceService.sommeCommission();
+    }
+    @GetMapping("/venteannonce/demande/{idUser}")
+    public List<VenteAnnonce> getDemandeAchatByUser(@PathVariable Long idUser) {
+        return venteannonceService.getDemandeAchatByUser(idUser);
     }
 }

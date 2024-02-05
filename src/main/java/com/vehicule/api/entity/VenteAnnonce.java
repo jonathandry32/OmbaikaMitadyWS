@@ -17,6 +17,7 @@ public class VenteAnnonce {
     @JoinColumn(name="idAnnonce",referencedColumnName="idAnnonce")
     private Annonce annonce;
     private LocalDateTime date;
+    private int etat;
 
     public Long getIdVenteAnnonce() {
         return idVenteAnnonce;
@@ -24,6 +25,13 @@ public class VenteAnnonce {
 
     public void setIdVenteAnnonce(Long id) {
         this.idVenteAnnonce = id;
+    }
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
     }
 
     public LocalDateTime getDate() {

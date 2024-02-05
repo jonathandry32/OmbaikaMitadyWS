@@ -26,6 +26,7 @@ public class VenteAnnonceService {
         venteannonce.setAcheteur(acheteur);
         venteannonce.setAnnonce(annonce);
         venteannonce.setDate(LocalDateTime.now());
+        venteannonce.setEtat(0);
         venteannonce = venteannonceRepository.save(venteannonce);
         return venteannonce;
     }
@@ -58,6 +59,18 @@ public class VenteAnnonceService {
     
     public List<Object[]> venteByCategorie(Long idCategorie) {
         return venteannonceRepository.venteByCategorie(idCategorie);
+    }
+
+    public List<VenteAnnonce> getDemandeAchatByUser(Long idUser) {
+        return venteannonceRepository.getDemandeAchatByUser(idUser);
+    }
+    
+    public void validerVenteAnnonce(Long idVenteAnnonce) {
+        venteannonceRepository.validerAchat(idVenteAnnonce);
+    }
+
+    public void supprimerVenteAnnonces(Long idAnnonce, Long idUser) {
+        venteannonceRepository.deleteByIdAnnonceAndNotIdUser(idAnnonce, idUser);
     }
     
 }
