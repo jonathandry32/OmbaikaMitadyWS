@@ -28,6 +28,11 @@ public class MessageController {
     public List<Message> getMessage(Long me,Long other) {
         return messageService.getMessageWith(me, other);
     }
+    
+    @GetMapping("/messages/users")
+    public List<User> getMessage(Long me) {
+        return messageService.getUsersWithMessages(me);
+    }
 
     @PostMapping("/message/{me}/{other}")
     public Message sendMessage(@PathVariable Long me,@PathVariable Long other,String messages){
