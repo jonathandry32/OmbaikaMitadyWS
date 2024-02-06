@@ -65,13 +65,13 @@ public class AnnonceController {
     @PostMapping("/annonceSaveApp")
     public Annonce saveApp(@RequestBody Map<String, Object> data){
         String description = (String) data.get("description");
-        Long idUser = Long.parseLong(data.get("idUser").toString()); // Convertir la chaîne en Long
+        Long idUser = Long.parseLong(data.get("idUser").toString());
         Long idModele = ((Number) data.get("idModele")).longValue();
         Long idCarburant = ((Number) data.get("idCarburant")).longValue();
         String boite = (String) data.get("boite");
         String contact = (String) data.get("contact");
-        Double prix = Double.parseDouble(data.get("prix").toString()); // Convertir la chaîne en Double
-        Double kilometrage = Double.parseDouble(data.get("kilometrage").toString()); // Convertir la chaîne en Double
+        Double prix = Double.parseDouble(data.get("prix").toString());
+        Double kilometrage = Double.parseDouble(data.get("kilometrage").toString());
         List<String> photos = (List<String>) data.get("photos");
 
         User proprietaire = userRepository.findById(idUser).get();
@@ -81,6 +81,7 @@ public class AnnonceController {
         int etat=0;
         int status=0;
         Annonce result = annonceService.saveAnnonce(description,proprietaire,modele,carburant,boite,contact,prix,commission,kilometrage,etat,status);
+
         for(int i=0;i<photos.size();i++){
             photoannonceService.savePhotoAnnonce(result, photos.get(i));
         }
@@ -219,5 +220,15 @@ public class AnnonceController {
         int etat = 0;
         int status = 0;
         return annonceService.getAnnouncementsByEtatAndStatus(etat, status);
+    }
+
+    @PostMapping("savePhotosAnnonce")
+    public void savePhotosAnnonce(@RequestBody Map<String, Object> data){
+        List<String> photos = (List<String>) data.get("photos");
+        Long idAnnonce = ((Number) data.get("idAnnonce")).longValue();
+
+        for(int i=0;i<photos.size();i++){
+            photoannonceService.savePhotoAnnonce(annonceRepository.findById(idAnnonce).get(), photos.get(i));
+        }
     }
 }
