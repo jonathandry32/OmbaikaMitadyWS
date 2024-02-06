@@ -30,7 +30,7 @@ public class MessageController {
     }
     
     @GetMapping("/messages/users")
-    public List<User> getMessage(Long me) {
+    public List<User> getMessages(Long me) {
         return messageService.getUsersWithMessages(me);
     }
 
