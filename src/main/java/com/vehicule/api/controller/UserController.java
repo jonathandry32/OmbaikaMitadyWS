@@ -28,4 +28,14 @@ public class UserController {
     public User sign(String email, String nom, String password,String pdp)  {
         return userService.saveUser(email,nom,password,pdp);
     }
+    
+    @GetMapping("/users/{id}")
+    public User find(@PathVariable("id") Long id){
+        return userRepository.findById(id).get();
+    }
+    
+    @GetMapping("/users")
+    public List<User> findAll(){
+        return userRepository.findAll();
+    }
 }

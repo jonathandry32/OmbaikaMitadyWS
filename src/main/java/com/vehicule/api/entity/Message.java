@@ -10,7 +10,6 @@ public class Message {
 
     @Id
     private String id;
-
     private User sender;
     private User receiver;
     private String message;

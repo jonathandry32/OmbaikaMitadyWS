@@ -36,19 +36,13 @@ public class MessageService  {
         Sort sortByDateAsc = Sort.by(Sort.Order.asc("date"));
         return messageRepository.getMessageUserWith(userId1, userId2, sortByDateAsc);
     }
-
-    public static List<User> removeDuplicates(List<User> userList) {
-        Set<User> userSet = new HashSet<>(userList);
-        return new ArrayList<>(userSet);
-    }
     
     public List<User> getUsersWithMessages(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return new ArrayList<>();
         }
-
-        List<Message> messages = messageRepository.findBySenderOrReceiver(user, user);
+        List<Message> messages = messageRepository.findBySenderOrReceiveroui(userId);
         Set<User> uniqueUsers = new HashSet<>();
 
         for (Message message : messages) {
