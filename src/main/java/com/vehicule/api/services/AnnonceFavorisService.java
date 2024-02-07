@@ -39,7 +39,7 @@ public class AnnonceFavorisService {
     }
     
     public List<AnnonceFavoris> getFavoriteAnnoncesByUserId(Long userId) {
-        return annonceFavorisRepository.findByUser_Id(userId);
+        return annonceFavorisRepository.findByUser_IdOrderByAnnonce_DateDesc(userId);
     }
     
     public boolean estAnnonceFavoris(Long idUser, Long idAnnonce) {

@@ -60,5 +60,11 @@ public interface VenteAnnonceRepository extends JpaRepository<VenteAnnonce, Long
     @Modifying
     @Query("DELETE FROM VenteAnnonce va WHERE va.annonce.idAnnonce = :idAnnonce AND va.acheteur.id != :idUser")
     void deleteByIdAnnonceAndNotIdUser(Long idAnnonce, Long idUser);
+
+       @Transactional
+       @Modifying
+       @Query("DELETE FROM VenteAnnonce va WHERE va.idVenteAnnonce = :idVenteAnnonce")
+       void deleteByIdVenteAnnonce(Long idVenteAnnonce);
     
+    boolean existsByAnnonceIdAnnonceAndAcheteurId(Long idAnnonce, Long idUser);
 }

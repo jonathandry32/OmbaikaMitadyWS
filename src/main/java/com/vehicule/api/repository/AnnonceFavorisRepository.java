@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface AnnonceFavorisRepository extends JpaRepository<AnnonceFavoris, Long> {
-    List<AnnonceFavoris> findByUser_Id(Long userId);
+    List<AnnonceFavoris> findByUser_IdOrderByAnnonce_DateDesc(Long userId);
 
     @Transactional
     @Modifying

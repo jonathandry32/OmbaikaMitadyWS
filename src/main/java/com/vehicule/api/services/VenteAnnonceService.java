@@ -32,7 +32,7 @@ public class VenteAnnonceService {
     }
 
     public void deleteVenteAnnonce(Long id){
-        venteannonceRepository.deleteById(id);
+        venteannonceRepository.deleteByIdVenteAnnonce(id);
     }
 
     public VenteAnnonce updateVenteAnnonce(Long id, VenteAnnonce ann){
@@ -71,6 +71,10 @@ public class VenteAnnonceService {
 
     public void supprimerVenteAnnonces(Long idAnnonce, Long idUser) {
         venteannonceRepository.deleteByIdAnnonceAndNotIdUser(idAnnonce, idUser);
+    }
+
+    public boolean existsByAnnonceIdAndAcheteurId(Long idAnnonce, Long idUser) {
+        return venteannonceRepository.existsByAnnonceIdAnnonceAndAcheteurId(idAnnonce, idUser);
     }
     
 }
