@@ -9,6 +9,7 @@ import com.vehicule.api.repository.CarburantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
 import java.util.Date;
 import java.time.LocalDateTime;
@@ -52,7 +53,7 @@ public class AnnonceService {
     }
 
     public List<Annonce> getAnnoncesByUserId(Long userId) {
-        return annonceRepository.findByProprietaire_Id(userId);
+        return annonceRepository.findByProprietaire_IdOrderByDateDesc(userId);
     }
 
     public void updateStatusByIdAnnonce(Long idAnnonce) {
@@ -64,6 +65,7 @@ public class AnnonceService {
     }
 
     public List<Annonce> getAnnouncementsByEtatAndStatus(int etat, int status) {
-        return annonceRepository.findByEtatAndStatus(etat, status);
+        Sort sort = Sort.by(Sort.Direction.DESC, "date");
+        return annonceRepository.findByEtatAndStatus(etat, status,sort);
     }
 }

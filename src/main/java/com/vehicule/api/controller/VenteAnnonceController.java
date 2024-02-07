@@ -84,4 +84,8 @@ public class VenteAnnonceController {
     public List<VenteAnnonce> getDemandeAchatByUser(@PathVariable Long idUser) {
         return venteannonceService.getDemandeAchatByUser(idUser);
     }
+    @GetMapping("/auth/venteannonce/check")
+    public boolean checkVenteAnnonceExists(Long idAnnonce,Long idUser) {
+        return venteannonceService.existsByAnnonceIdAndAcheteurId(idAnnonce, idUser);
+    }
 }

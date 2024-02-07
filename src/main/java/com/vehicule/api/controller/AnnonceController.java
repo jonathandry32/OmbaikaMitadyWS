@@ -87,7 +87,8 @@ public class AnnonceController {
         }
         return result;
     }
-    @PutMapping("/annonces/sellApp")
+
+    @PutMapping("/annonces/sellAppMob")
     public void updateStatusByIdAnnonce(@RequestBody Map<String,Object> data) {
         Long idAnnonce = Long.parseLong(data.get("idAnnonce").toString());
         Long idUser = Long.parseLong(data.get("idUser").toString());
@@ -167,9 +168,20 @@ public class AnnonceController {
     
     @PutMapping("/annonces/sell")
     public void updateStatusByIdAnnonce(Long idAnnonce,Long idVenteAnnonce,Long idUser) {
+        System.out.println(idAnnonce+" "+idVenteAnnonce+" "+idUser);
         annonceService.updateStatusByIdAnnonce(idAnnonce);
         venteannonceService.validerVenteAnnonce(idVenteAnnonce);
         venteannonceService.supprimerVenteAnnonces(idAnnonce,idUser);
+    }
+    @PutMapping("/annonces/sellApp")
+    public void updateStatusByIdAnnonceApp(@RequestBody Map<String, Long> requestBody) {
+        Long idAnnonce = Long.parseLong(requestBody.get("idAnnonce").toString());
+        Long idVenteAnnonce = Long.parseLong(requestBody.get("idVenteAnnonce").toString());
+        Long idUser = Long.parseLong(requestBody.get("idUser").toString());
+        System.out.println(idAnnonce + " " + idVenteAnnonce + " " + idUser);
+        annonceService.updateStatusByIdAnnonce(idAnnonce);
+        venteannonceService.validerVenteAnnonce(idVenteAnnonce);
+        venteannonceService.supprimerVenteAnnonces(idAnnonce, idUser);
     }
 
     @PutMapping("/annonces/validate")
