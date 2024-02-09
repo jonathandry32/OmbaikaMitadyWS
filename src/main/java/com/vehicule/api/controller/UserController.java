@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
 
-import java.util.ArrayList;
+import java.util.*;
+
 import java.util.List;
 
 @RestController
@@ -37,5 +36,21 @@ public class UserController {
     @GetMapping("/users")
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    //-----ATPRES DEployement
+    @PostMapping("/auth/signApp")
+    public User sign(@RequestBody Map<String, Object> requestBody) throws Exception {
+        try{
+            String email = (String) requestBody.get("mail");
+            String password = (String) requestBody.get("password");
+            String nom = (String) requestBody.get("username");
+            String pdpUrl = (String) requestBody.get("pdpUrl");
+
+            return userService.saveUser(email,nom,password,pdpUrl);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
     }
 }
